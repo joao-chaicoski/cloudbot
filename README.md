@@ -1,10 +1,8 @@
 # Cloudbot — Transaction Analytics Agent
 ## Short Presentation
-Cloudbot was created to help translate Businnes questions into SQL queries and visualizations. In addition to this, there is also a Daily KPIs module included to help tracking key KPIs and if they are going over or under the selected thresholds.
+Cloudbot was created to help translate Business questions into SQL queries and visualizations. In addition to this, there is also a Daily KPIs module included to help tracking key KPIs and if they are going over or under the selected thresholds. Obs.: For now the only monitored KPI is TPV.)
 
-For now the only monitored KPI is TPV.
-
-Cloudbot uses an LLM to translate Natural Language questions into queries. Allowing the uszer to "chat" with the database. With little tweaking to the code, the user is able to personalize rules for Cloudbot.
+Cloudbot uses a Large Language Model (Groq Llama 3). to translate Natural Language questions into queries. Allowing the uszer to "chat" with the database. With little tweaking to the code, the user is able to personalize rules for Cloudbot.
 
 **The current architecture is as follows:**
 - User Input: The user types a question in Streamlit.
@@ -47,7 +45,7 @@ Visualization - Matplotlib and Seaborn because of the personalization options it
 **Repository layout**
 - `main.py` — Streamlit app UI
 - `agent.py` — LLM prompt + query runner (returns SQL and pandas DataFrame)
-- `kpis.py` - 
+- `kpis.py` - KPIs module.
 - `db/init_db.py` — helper to create `cloudwalk.db` from CSV
 - `data/operational_intelligence_transactions_db.csv` — sample data
 - `requirements.txt` — Python dependencies
@@ -121,4 +119,5 @@ Usage
   - `Webhook URL`: optional; if provided, you can click "Send KPI Alert" after a trigger fires.
 - Click `Run KPIs` to compute TPV and view percentage variations vs D-1, D-7 and D-30. If any variation exceeds the threshold you'll see a warning and can send the alert.
 <img width="1876" height="945" alt="image" src="https://github.com/user-attachments/assets/85d251dc-fe22-4f2a-a89d-df170958f30d" />
+
 
