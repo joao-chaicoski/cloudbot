@@ -1,5 +1,49 @@
 # Cloudbot — Transaction Analytics Agent
+## Short Presentation
+Cloudbot was created to help translate Businnes questions into SQL queries and visualizations. In addition to this, there is also a Daily KPIs module included to help tracking key KPIs and if they are going over or under the selected thresholds.
 
+For now the only monitored KPI is TPV.
+
+Cloudbot uses an LLM to translate Natural Language questions into queries. Allowing the uszer to "chat" with the database. With little tweaking to the code, the user is able to personalize rules for Cloudbot.
+
+**The current architecture is as follows:**
+- User Input: The user types a question in Streamlit.
+
+- Translation: The Agent sends the schema and question to Groq (Llama 3).
+
+- Execution: The LLM returns SQL, which is executed against DuckDB.
+
+- Visualization: Results are converted to a Pandas DataFrame and rendered using Seaborn/Matplotlib.
+
+- Alerting: Separately, the KPI engine computes daily aggregations and pushes alerts via Webhooks if thresholds are breached.
+
+The agent was built using the following stack:
+Frontend - Streamlit for the rapid UI development and native support for dataframes. This also helped with the session state management, allowing me to include an option to filter between graph types. (Bar chart, Line chart and boxplot).
+
+Database - DuckDB, would've also worked with SQLite.
+
+LLM - Groq API for the low latency and free API usage for personal projects.
+
+Orchestration - Langchain to handle the prompt templating and connection to the LLM.
+
+Visualization - Matplotlib and Seaborn because of the personalization options it gives and I was confortable working with those since I already used them extensivily in previous personal projects.
+
+## Sample Queries and visualization
+
+- Which product has the highest TPV?
+![Highest_TPV](https://github.com/user-attachments/assets/2692a662-82a6-42b5-b473-1506deea3101)
+
+- How do weekdays influence TPV?
+![Weekday](https://github.com/user-attachments/assets/d8ec5997-d88b-4142-bfff-741e90d0dc8c)
+
+- Which segment has the highest average TPV? And the highest Average Ticket?
+![HighestTPV](https://github.com/user-attachments/assets/447594aa-0897-47dd-a540-01a4241a3cfe)
+
+
+- Which anticipation method is most used by individuals and by businesses?
+![Anticipation](https://github.com/user-attachments/assets/7eda7b32-eb04-4ecc-8b43-a497b28604d6)
+
+## How to use
 **Repository layout**
 - `main.py` — Streamlit app UI
 - `agent.py` — LLM prompt + query runner (returns SQL and pandas DataFrame)
@@ -69,17 +113,12 @@ Usage
 
 
 
-KPI tool (Daily TPV & Alerts)
------------------------------
-Streamlit UI
+## KPI tool (Daily TPV & Alerts)
 - Start the app as described above and open the sidebar by clicking in the top left of the screen to see "Daily KPIs & Alerts" section.
 - UI controls:
   - `KPI date`: pick the date to evaluate (defaults to today when left empty).
   - `Alert threshold`: a fractional threshold (e.g., `0.25` = 25%). Set up the Lower and Upper ends of the threshold and the agent will Trigger if it see any changes that go over or under the limits.
   - `Webhook URL`: optional; if provided, you can click "Send KPI Alert" after a trigger fires.
 - Click `Run KPIs` to compute TPV and view percentage variations vs D-1, D-7 and D-30. If any variation exceeds the threshold you'll see a warning and can send the alert.
+<img width="1876" height="945" alt="image" src="https://github.com/user-attachments/assets/85d251dc-fe22-4f2a-a89d-df170958f30d" />
 
-
-Configuration and notes
-- Database: `kpis.py` reads from `cloudwalk.db` by default. Set `CLOUDWALK_DB` environment variable to change the path.
-- If comparative days are missing (or previous value is 0) the percent change is reported as `N/A` and will not trigger an alert.
