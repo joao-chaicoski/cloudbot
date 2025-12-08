@@ -52,6 +52,7 @@ Remember to create both folders named here, db (put init_db.py inside of it) and
 - `data/operational_intelligence_transactions_db.csv` — sample data
 - `requirements.txt` — Python dependencies
 - `.env` - File that stores the API key.
+- `logo.png` - Cloudwalk logo, just put it in the same folder as the main.py and it should recognize the png.
 
 **Prerequisites**
 - Python 3.9+ (3.10/3.11 recommended)
@@ -121,6 +122,7 @@ Usage
   - `Webhook URL`: optional; if provided, you can click "Send KPI Alert" after a trigger fires.
 - Click `Run KPIs` to compute TPV and view percentage variations vs D-1, D-7 and D-30. If any variation exceeds the threshold you'll see a warning and can send the alert.
 <img width="1876" height="945" alt="image" src="https://github.com/user-attachments/assets/85d251dc-fe22-4f2a-a89d-df170958f30d" />
+
 
 
 
