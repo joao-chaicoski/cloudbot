@@ -97,8 +97,9 @@ def run_query(question: str):
 
         sql = str(raw).strip()
 
-    
-    # This is a hardcoded removal of the markdown quotations. Since I amde it explicit in the system prompt, I is not necessary to have it here anymore.
+    # This is a hardcoded removal of the markdown quotations. Since I made it explicit in the system prompt, 
+    # it is not necessary to have it here anymore. Leaving it in case I notice its better to state it here 
+    # than in the system_template query.
     '''Remove Markdown code fences if present (```sql ... ``` or ``` ... ```)
     m = re.search(r"```(?:sql\n)?(.*?)```", sql, re.S | re.I)
     if m:

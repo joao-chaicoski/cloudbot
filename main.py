@@ -9,11 +9,10 @@ from agent import run_query
 import kpis
 
 st.set_page_config(page_title="Cloudbot", layout="wide")
-# Header: title on the left, optional logo on the right
 
 with st.sidebar:
     st.header("Daily KPIs")
-    # 1. Inputs
+    # Inputs
     kpi_date = st.date_input("Reference Date", value=None)
     
     st.subheader("Alert Thresholds")
@@ -29,7 +28,7 @@ with st.sidebar:
 
     st.markdown("---")
 
-    # 2. Run Button
+    # Run Button
     if st.button("Run KPIs", use_container_width=True):
         import datetime as _dt
         target = kpi_date if kpi_date is not None else _dt.date.today()
@@ -37,7 +36,7 @@ with st.sidebar:
         st.session_state['kpi_summary'] = kpis.compute_daily_tpv_summary(target)
         st.session_state['kpi_ran'] = True
 
-    # 3. Sidebar Results
+    # Sidebar Results
     if st.session_state.get('kpi_ran'):
         summary = st.session_state['kpi_summary']
         
@@ -125,7 +124,7 @@ question = st.text_input(
     placeholder="e.g., What is the total amount by MCC for last week?"
 )
 
-# 1. RUN QUERY
+# RUN QUERY
 if st.button("Run Query"):
     if question:
         with st.spinner("Generating SQL..."):
@@ -136,7 +135,7 @@ if st.button("Run Query"):
     else:
         st.warning("Please enter a question.")
 
-# 2. DISPLAY RESULTS
+# DISPLAY RESULTS
 if st.session_state.get('query_ran'):
     sql = st.session_state.get('last_sql')
     result = st.session_state.get('last_result')
@@ -151,9 +150,6 @@ if st.session_state.get('query_ran'):
         df: pd.DataFrame = result
         st.dataframe(df)
 
-        # ---------------------------------------------------------
-        # Interactive Visualization Section
-        # ---------------------------------------------------------
         if not df.empty and df.shape[1] >= 1:
             st.markdown("---")
             
@@ -169,7 +165,7 @@ if st.session_state.get('query_ran'):
                 )
 
             try:
-                # 1. SMART COLUMN DETECTION
+                # COLUMN DETECTION
                 cols = df.columns
                 x_col = cols[0]  # First column is usually X (Date/Category)
                 
@@ -184,7 +180,7 @@ if st.session_state.get('query_ran'):
                 if remaining:
                     hue_col = remaining[0] # Use the first extra column as the grouper
 
-                # 2. FIGURE SETUP
+                # FIGURE SETUP
                 fig, ax = plt.subplots(figsize=(8, 3))
                 fig.patch.set_alpha(0)
                 ax.set_facecolor("none")
@@ -202,7 +198,7 @@ if st.session_state.get('query_ran'):
                     spine.set_linewidth(0.5)
                 ax.grid(True, linestyle='--', alpha=0.2, linewidth=0.5)
 
-                # 3. PLOTTING LOGIC
+                # PLOTTING LOGIC
                 if chart_type == "Bar":
                     # If we have a Hue (Legend), use it to group bars
                     if hue_col:
@@ -237,7 +233,6 @@ if st.session_state.get('query_ran'):
                     is_datetime = pd.api.types.is_datetime64_any_dtype(df[x_col])
                     high_cardinality = df[x_col].nunique() > 20
                     
-                    # If we have a Hue, we usually keep X to show side-by-side comparison
                     if hue_col:
                          sns.boxplot(data=df, x=x_col, y=y_col, hue=hue_col, ax=ax, palette="crest", linewidth=0.8, fliersize=2)
                          plt.setp(ax.get_xticklabels(), rotation=45, ha='right', color=TEXT_COLOR)
@@ -248,7 +243,7 @@ if st.session_state.get('query_ran'):
                         sns.boxplot(data=df, x=x_col, y=y_col, ax=ax, palette="crest", linewidth=0.8, fliersize=2)
                         plt.setp(ax.get_xticklabels(), rotation=45, ha='right', color=TEXT_COLOR)
 
-                # 4. CUSTOM LEGEND STYLING (Crucial for Dark Mode)
+                # CUSTOM LEGEND STYLING (Crucial for Dark Mode)
                 if hue_col:
                     leg = ax.get_legend()
                     if leg:
