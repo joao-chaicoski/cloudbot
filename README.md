@@ -17,15 +17,15 @@ Cloudbot uses a Large Language Model (Groq Llama 3). to translate Natural Langua
 
 The agent was built using the following stack:
 
-Frontend - Streamlit for the rapid UI development and native support for dataframes. This also helped with the session state management, allowing me to include an option to filter between graph types. (Bar chart, Line chart and boxplot).
+**Frontend** - Streamlit for the rapid UI development and native support for dataframes. This also helped with the session state management, allowing me to include an option to filter between graph types. (Bar chart, Line chart and boxplot).
 
-Database - DuckDB, would've also worked with SQLite.
+**Database** - DuckDB, would've also worked with SQLite.
 
-LLM - Groq API for the low latency and free API usage for personal projects.
+**LLM** - Groq API for the low latency and free API usage for personal projects.
 
-Orchestration - Langchain to handle the prompt templating and connection to the LLM.
+**Orchestration** - Langchain to handle the prompt templating and connection to the LLM.
 
-Visualization - Matplotlib and Seaborn because of the personalization options it gives and I was confortable working with those since I already used them extensivily in previous personal projects.
+**Visualization** - Matplotlib and Seaborn because of the personalization options it gives and I was confortable working with those since I already used them extensivily in previous personal projects.
 
 ## Sample Queries and visualization
 
@@ -119,6 +119,7 @@ Usage
   - `Webhook URL`: optional; if provided, you can click "Send KPI Alert" after a trigger fires.
 - Click `Run KPIs` to compute TPV and view percentage variations vs D-1, D-7 and D-30. If any variation exceeds the threshold you'll see a warning and can send the alert.
 <img width="1876" height="945" alt="image" src="https://github.com/user-attachments/assets/85d251dc-fe22-4f2a-a89d-df170958f30d" />
+
 
 
 
