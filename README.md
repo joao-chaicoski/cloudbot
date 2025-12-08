@@ -122,6 +122,9 @@ Usage
   - `Webhook URL`: optional; if provided, you can click "Send KPI Alert" after a trigger fires.
 - Click `Run KPIs` to compute TPV and view percentage variations vs D-1, D-7 and D-30. If any variation exceeds the threshold you'll see a warning and can send the alert.
 <img width="1876" height="945" alt="image" src="https://github.com/user-attachments/assets/85d251dc-fe22-4f2a-a89d-df170958f30d" />
+- If you want a webhook URL to test the "Send Alert" feature, use the website below to generate one.
+https://webhook-test.com
+
 
 
 
