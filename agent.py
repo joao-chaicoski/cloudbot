@@ -9,10 +9,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# # Connect to the DuckDB database
-# con = duckdb.connect("cloudwalk.db")
-
-# Configure LLM lazily
 _llm = None
 
 def get_llm():
