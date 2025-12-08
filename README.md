@@ -16,6 +16,7 @@ Cloudbot uses a Large Language Model (Groq Llama 3). to translate Natural Langua
 - Alerting: Separately, the KPI engine computes daily aggregations and pushes alerts via Webhooks if thresholds are breached.
 
 The agent was built using the following stack:
+
 Frontend - Streamlit for the rapid UI development and native support for dataframes. This also helped with the session state management, allowing me to include an option to filter between graph types. (Bar chart, Line chart and boxplot).
 
 Database - DuckDB, would've also worked with SQLite.
@@ -118,6 +119,7 @@ Usage
   - `Webhook URL`: optional; if provided, you can click "Send KPI Alert" after a trigger fires.
 - Click `Run KPIs` to compute TPV and view percentage variations vs D-1, D-7 and D-30. If any variation exceeds the threshold you'll see a warning and can send the alert.
 <img width="1876" height="945" alt="image" src="https://github.com/user-attachments/assets/85d251dc-fe22-4f2a-a89d-df170958f30d" />
+
 
 
 
