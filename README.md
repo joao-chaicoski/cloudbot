@@ -1,0 +1,2 @@
+# cloudbot
+Cloudbot repository.
