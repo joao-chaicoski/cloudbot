@@ -21,7 +21,7 @@ The agent was built using the following stack:
 
 **Database** - DuckDB, would've also worked with SQLite.
 
-**LLM** - Groq API for the low latency and free API usage for personal projects.
+**LLM** - Llama 3.3 70B connected through Groq API for the low latency and free API usage for personal projects.
 
 **Orchestration** - Langchain to handle the prompt templating and connection to the LLM.
 
@@ -124,6 +124,7 @@ Usage
 <img width="1876" height="945" alt="image" src="https://github.com/user-attachments/assets/85d251dc-fe22-4f2a-a89d-df170958f30d" />
 - If you want a webhook URL to test the "Send Alert" feature, use the website below to generate one.
 https://webhook-test.com
+
 
 
 
